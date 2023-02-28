@@ -1,0 +1,35 @@
+<form [formGroup]="form" class="example-form" (ngSubmit)="onSubmit()">
+    <h1 mat-dialog-title>Please tell us about yourself *</h1>
+    <div mat-dialog-content>
+        <mat-form-field appearance="outline">
+            <mat-label>Choose answer format</mat-label>
+            <mat-select formControlName="answer_format" (selectionChange)="changeAnswerFormat($event)">
+              <mat-option [value]="FORM_TYPES.paragraph">Paragraph</mat-option>
+              <mat-option [value]="FORM_TYPES.checkboxlist">Check Box List</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <input matInput formControlName="question" placeholder="Question">
+        </mat-form-field>
+        <ng-container>
+            <div formArrayName="answers">
+                <div *ngFor="let ans of answers?.controls; let i=index">
+                    <div [formGroupName]="i">
+                        <mat-icon (click)="removeAnswer(i)" *ngIf="answers.controls.length > 1">delete_outline</mat-icon>
+                        <mat-form-field appearance="outline" >
+                            <input matInput formControlName="answer" placeholder="Add Answer Option">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        <button 
+        mat-button 
+        (click)="addAnswer()" 
+        *ngIf="form.get('answer_format')?.value === FORM_TYPES.checkboxlist"
+        >+ Add new answer</button>
+    </div>
+    <div class="d-block">
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+    </div>
+</form>

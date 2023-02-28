@@ -1,0 +1,49 @@
+<section class="button-div" *ngIf="!data.length">
+  <button mat-button (click)="openDialog()">Add Question</button>
+</section>
+<section class="question-wrapper" *ngIf="data.length">
+  <mat-card>
+    <mat-card-content>
+      <form [formGroup]="form">
+        <mat-form-field appearance="outline">
+          <mat-label>Please tell us about yourself *</mat-label>
+          <textarea matInput formControlName="bio"></textarea>
+        </mat-form-field>
+        <ng-container *ngFor="let item of data; index as i">
+          <h2>{{ item.question }}</h2>
+          <div
+            *ngIf="
+              item.answer_format === FORM_TYPES.checkboxlist;
+              else paragraph
+            "
+          >
+            <div *ngFor="let options of item.answers">
+              <mat-checkbox class="example-margin">{{
+                options?.answer
+              }}</mat-checkbox>
+            </div>
+            <mat-checkbox class="example-margin">Other</mat-checkbox>
+          </div>
+          <ng-template #paragraph>
+            <div *ngFor="let options of item.answers">
+              {{ options?.answer }}
+            </div>
+          </ng-template>
+        </ng-container>
+      </form>
+    </mat-card-content>
+    <div class="d-block">
+      <button mat-button (click)="openDialog()" color="primary" class="m-left">
+        Add New Question
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        class="m-right"
+        (click)="review()"
+      >
+        Review my answers
+      </button>
+    </div>
+  </mat-card>
+</section>

@@ -1,0 +1,35 @@
+section {
+    width: 100%;
+    height: 100%;
+    mat-form-field {
+        width: 100%;
+    }
+}
+.button-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    button {
+        padding: auto;
+    }
+}
+.question-wrapper {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    mat-card {
+        width: 70%;
+    }
+    .d-block {
+        display: block;
+        margin-top: auto;
+        padding-bottom: 10px;
+        .m-left {
+            margin-left: 5px;
+        }
+        .m-right {
+            float: right;
+            margin-right: 10px;
+        }
+    }
+}

@@ -1,0 +1,22 @@
+<section class="container">
+  <h2>Please tell us about yourself</h2>
+  <p>{{ assesMentData.bio }}</p>
+  <ng-container *ngFor="let item of assesMentData.data; index as i">
+    <h2>{{ item.question }}</h2>
+    <div *ngIf="item.answer_format === FORM_TYPES.checkboxlist; else paragraph">
+      <div *ngFor="let options of item.answers">
+        {{ options?.answer }}
+      </div>
+    </div>
+    <ng-template #paragraph>
+      <div *ngFor="let options of item.answers">
+        {{ options?.answer }}
+      </div>
+    </ng-template>
+  </ng-container>
+  <div class="d-block">
+    <button mat-button color="primary" class="m-left" routerLink="/form/builder">
+      Back to Forms Builder
+    </button>
+  </div>
+</section>
